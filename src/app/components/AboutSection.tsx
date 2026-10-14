@@ -88,79 +88,77 @@ export default function AboutSection() {
       >
         {/* ─────────────────────────────────────────────────────────────
             FOUR 3D DECORATIVE ARTIFACTS IN THE EXACT FOUR CORNERS
+            Mobile: Tucked tightly in corners (w-[58px], top/bottom/left/right-2.5)
+            Desktop: Unchanged original coordinates (top-[5.5rem], left/right-[2.5rem])
             ───────────────────────────────────────────────────────────── */}
-        {/* Top-left: Moon icon (below floating navbar in top-left corner) */}
+        {/* Top-left: Moon icon */}
         <FadeIn
           delay={0.1}
           x={-60}
           y={0}
           duration={0.9}
-          className="absolute pointer-events-none z-10"
-          style={{ top: "5.5rem", left: "2.5rem" }}
+          className="absolute pointer-events-none z-10 top-2.5 left-2.5 sm:top-[5.5rem] sm:left-[2.5rem]"
         >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
             alt=""
             width={240}
             height={240}
-            className="w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:8s]"
+            className="w-[58px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:8s]"
             draggable={false}
           />
         </FadeIn>
 
-        {/* Top-right: Lego icon (in top-right corner) */}
+        {/* Top-right: Lego icon */}
         <FadeIn
           delay={0.15}
           x={60}
           y={0}
           duration={0.9}
-          className="absolute pointer-events-none z-10"
-          style={{ top: "5.5rem", right: "2.5rem" }}
+          className="absolute pointer-events-none z-10 top-2.5 right-2.5 sm:top-[5.5rem] sm:right-[2.5rem]"
         >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png"
             alt=""
             width={240}
             height={240}
-            className="w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:7s]"
+            className="w-[58px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:7s]"
             draggable={false}
           />
         </FadeIn>
 
-        {/* Bottom-left: Smiley face (in bottom-left corner) */}
+        {/* Bottom-left: Smiley face */}
         <FadeIn
           delay={0.25}
           x={-60}
           y={0}
           duration={0.9}
-          className="absolute pointer-events-none z-10"
-          style={{ bottom: "2.5rem", left: "2.5rem" }}
+          className="absolute pointer-events-none z-10 bottom-2.5 left-2.5 sm:bottom-[2.5rem] sm:left-[2.5rem]"
         >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
             alt=""
             width={220}
             height={220}
-            className="w-[110px] sm:w-[150px] md:w-[185px] lg:w-[220px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:9s]"
+            className="w-[54px] sm:w-[150px] md:w-[185px] lg:w-[220px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:9s]"
             draggable={false}
           />
         </FadeIn>
 
-        {/* Bottom-right: 3D cursor arrow (in bottom-right corner) */}
+        {/* Bottom-right: 3D cursor arrow */}
         <FadeIn
           delay={0.3}
           x={60}
           y={0}
           duration={0.9}
-          className="absolute pointer-events-none z-10"
-          style={{ bottom: "2.5rem", right: "2.5rem" }}
+          className="absolute pointer-events-none z-10 bottom-2.5 right-2.5 sm:bottom-[2.5rem] sm:right-[2.5rem]"
         >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
             alt=""
             width={240}
             height={240}
-            className="w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:8.5s]"
+            className="w-[58px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:8.5s]"
             draggable={false}
           />
         </FadeIn>
@@ -175,18 +173,18 @@ export default function AboutSection() {
               as="h2"
               per="char"
               preset="fade"
-              className="hero-heading font-black uppercase leading-none tracking-tight text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem]"
+              className="hero-heading font-black uppercase leading-none tracking-tight text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem]"
             >
               About me
             </TextEffect>
           </FadeIn>
 
           {/* Dynamic Gap */}
-          <div className="h-8 sm:h-12 md:h-14" />
+          <div className="h-4 sm:h-12 md:h-14" />
 
           {/* Character-by-Character Pinned Scroll Animated Text (Expansive Width) */}
           <div className="max-w-3xl lg:max-w-4xl px-2 sm:px-4">
-            <p className="text-[#D7E2EA] font-medium leading-relaxed md:leading-[1.7] text-lg sm:text-xl md:text-2xl lg:text-[1.4rem] text-center">
+            <p className="text-[#D7E2EA] font-medium leading-relaxed md:leading-[1.7] text-base sm:text-xl md:text-2xl lg:text-[1.4rem] text-center">
               {characters.map((char, i) => (
                 <span
                   key={i}
@@ -203,11 +201,11 @@ export default function AboutSection() {
           </div>
 
           {/* Collaborator badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-4 sm:mt-8">
             {portfolio.profile.collaborations.map((company) => (
               <span
                 key={company}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-mono tracking-wider text-[#D7E2EA]/85 bg-white/[0.04] border border-[#D7E2EA]/20 backdrop-blur-sm"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-mono tracking-wider text-[#D7E2EA]/85 bg-white/[0.04] border border-[#D7E2EA]/20 backdrop-blur-sm"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D7E2EA]/70" />
                 {company}
@@ -216,14 +214,23 @@ export default function AboutSection() {
           </div>
 
           {/* Dynamic Gap */}
-          <div className="h-8 sm:h-12 md:h-14" />
+          <div className="h-4 sm:h-12 md:h-14" />
 
-          {/* Dual Action: Contact Me & See Journey */}
-          <FadeIn delay={0.2} y={20} duration={0.8} className="relative z-30 flex flex-wrap items-center justify-center gap-5 sm:gap-6">
-            <ContactButton label="Contact Me" href="#contact" />
+          {/* Dual Action: Contact Me & See Journey (Side-by-side on mobile & desktop) */}
+          <FadeIn
+            delay={0.2}
+            y={20}
+            duration={0.8}
+            className="relative z-30 flex flex-row items-center justify-center gap-3 sm:gap-6 w-full max-w-sm sm:max-w-none px-2"
+          >
+            <ContactButton
+              label="Contact Me"
+              href="#contact"
+              className="px-5 py-3 sm:px-10 sm:py-3.5 text-xs sm:text-sm md:text-base shrink-0"
+            />
             <a
               href="#journey"
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium text-[#D7E2EA] bg-white/[0.05] hover:bg-white/[0.12] border border-[#D7E2EA]/20 transition-all duration-300 min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-8 sm:py-4 rounded-full text-xs sm:text-base font-medium text-[#D7E2EA] bg-white/[0.05] hover:bg-white/[0.12] border border-[#D7E2EA]/20 transition-all duration-300 min-h-[44px] shrink-0 whitespace-nowrap"
             >
               <span>See Journey</span>
               <span className="text-[#D7E2EA]/70">→</span>
