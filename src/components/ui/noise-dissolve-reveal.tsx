@@ -201,14 +201,14 @@ const NDR_CSS = `
 `
 
 function getTitleMetrics(clientWidth: number) {
-  // Mobile (<640): 48px (matches text-5xl exactly)
-  // Tablet (640-1024): 72px (matches text-7xl exactly)
-  // Desktop (>=1024): 96px (matches text-8xl exactly)
+  // Mobile (<640): Fluid 44px-54px
+  // Tablet (640-1024): Fluid 64px-76px
+  // Desktop (>=1024): 96px
   let titleCssSize = 96
   if (clientWidth < 640) {
-    titleCssSize = 48
+    titleCssSize = Math.max(Math.min(clientWidth * 0.12, 54), 44)
   } else if (clientWidth < 1024) {
-    titleCssSize = 72
+    titleCssSize = Math.max(Math.min(clientWidth * 0.085, 76), 64)
   } else {
     titleCssSize = 96
   }
@@ -241,7 +241,7 @@ function renderTextToCanvas(
   const titlePhysSize = titleCssSize * dpr
   const subPhysSize = subCssSize * dpr
 
-  ctx.font = `900 ${Math.round(titlePhysSize)}px var(--font-kanit), Kanit, "Helvetica Neue", Arial, sans-serif`
+  ctx.font = `900 ${Math.round(titlePhysSize)}px Kanit, "Helvetica Neue", Arial, sans-serif`
   ctx.fillStyle = "#FFFFFF"
   ctx.textAlign = "center"
   ctx.textBaseline = "middle"
@@ -345,7 +345,6 @@ export default function NoiseDissolveReveal({
       console.error("Program link error:", gl.getProgramInfoLog(prog))
       return
     }
-    setGlReady(true)
 
     const posAttr = gl.getAttribLocation(prog, "a_position")
     const buf = gl.createBuffer()
@@ -402,6 +401,7 @@ export default function NoiseDissolveReveal({
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+      setGlReady(true)
     }
 
     const resize = () => {
@@ -538,11 +538,17 @@ export default function NoiseDissolveReveal({
               className="flex flex-col items-center justify-center h-full w-full px-6 text-center select-none"
               style={{ transform: "translateY(-2%)" }}
             >
-              <h1 className="text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-white font-kanit leading-none">
+              <h1
+                className="font-black uppercase tracking-tight text-white font-kanit leading-none"
+                style={{ fontSize: "clamp(44px, 12vw, 96px)" }}
+              >
                 {veilTitle}
               </h1>
               {veilSubtitle && (
-                <p className="mt-4 text-xs sm:text-sm uppercase tracking-[0.3em] text-[#D7E2EA]/75 font-mono">
+                <p
+                  className="mt-4 uppercase tracking-[0.3em] text-[#D7E2EA]/75 font-mono"
+                  style={{ fontSize: "clamp(12px, 2.5vw, 14px)" }}
+                >
                   {veilSubtitle}
                 </p>
               )}
