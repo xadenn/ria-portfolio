@@ -5,9 +5,13 @@ import FadeIn from "./FadeIn";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { TextEffect } from "@/components/ui/text-effect";
 
+import { useCenterSpotlight } from "@/lib/use-center-spotlight";
+import { cn } from "@/lib/utils";
+
 export default function ServicesSection() {
   const { portfolio } = usePortfolio();
   const services = portfolio.services;
+  const { containerRef, activeIndex } = useCenterSpotlight(services.length);
 
   return (
     <section
@@ -35,34 +39,58 @@ export default function ServicesSection() {
           </TextEffect>
         </FadeIn>
 
-        {/* 5 Service Items List */}
-        <div className="border-t border-[#D7E2EA]/15">
-          {services.map((service, index) => (
-            <FadeIn
-              key={service.number}
-              delay={index * 0.1}
-              y={30}
-              duration={0.7}
-              className="group border-b border-[#D7E2EA]/15 py-8 sm:py-10 md:py-12 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-12 transition-all duration-300 hover:bg-white/[0.02] px-4 sm:px-6 rounded-2xl"
-            >
-              {/* Left: Giant Number */}
-              <div className="flex-shrink-0">
-                <span className="font-black text-[#D7E2EA]/20 group-hover:text-[#D7E2EA]/70 text-[clamp(3rem,10vw,140px)] leading-none select-none tracking-tighter transition-colors duration-300">
-                  {service.number}
-                </span>
-              </div>
+        {/* 5 Service Items List with Center-Scroll Spotlight */}
+        <div ref={containerRef} className="border-t border-[#D7E2EA]/15">
+          {services.map((service, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <div
+                key={service.number}
+                className={cn(
+                  "group border-b border-[#D7E2EA]/15 py-8 sm:py-10 md:py-12 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-12 transition-all duration-500 px-4 sm:px-6 rounded-2xl",
+                  isActive
+                    ? "bg-white/[0.05] border-[#D7E2EA]/35 shadow-[0_10px_35px_rgba(0,0,0,0.6),0_0_25px_rgba(215,226,234,0.08)]"
+                    : "hover:bg-white/[0.02]"
+                )}
+              >
+                {/* Left: Giant Number */}
+                <div className="flex-shrink-0">
+                  <span
+                    className={cn(
+                      "font-black text-[clamp(3rem,10vw,140px)] leading-none select-none tracking-tighter transition-all duration-500",
+                      isActive
+                        ? "text-[#D7E2EA] drop-shadow-[0_0_30px_rgba(215,226,234,0.45)]"
+                        : "text-[#D7E2EA]/20 group-hover:text-[#D7E2EA]/70"
+                    )}
+                  >
+                    {service.number}
+                  </span>
+                </div>
 
-              {/* Right: Stacked Name + Description */}
-              <div className="flex flex-col gap-2.5 max-w-2xl md:text-left">
-                <h3 className="font-medium uppercase text-[#D7E2EA] group-hover:text-white text-[clamp(1.15rem,2.2vw,2.1rem)] tracking-wide transition-colors">
-                  {service.name}
-                </h3>
-                <p className="font-light text-[#D7E2EA]/80 leading-relaxed text-[clamp(0.85rem,1.6vw,1.25rem)]">
-                  {service.description}
-                </p>
+                {/* Right: Stacked Name + Description */}
+                <div className="flex flex-col gap-2.5 max-w-2xl md:text-left">
+                  <h3
+                    className={cn(
+                      "font-medium uppercase text-[clamp(1.15rem,2.2vw,2.1rem)] tracking-wide transition-colors duration-500",
+                      isActive
+                        ? "text-white drop-shadow-[0_2px_12px_rgba(255,255,255,0.35)]"
+                        : "text-[#D7E2EA] group-hover:text-white"
+                    )}
+                  >
+                    {service.name}
+                  </h3>
+                  <p
+                    className={cn(
+                      "font-light leading-relaxed text-[clamp(0.85rem,1.6vw,1.25rem)] transition-colors duration-500",
+                      isActive ? "text-white/95" : "text-[#D7E2EA]/80"
+                    )}
+                  >
+                    {service.description}
+                  </p>
+                </div>
               </div>
-            </FadeIn>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
