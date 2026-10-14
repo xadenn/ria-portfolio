@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <radialGradient id="softGlow1" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#E2EDF8" stop-opacity="0.95" />
+      <stop offset="25%" stop-color="#A5C4E8" stop-opacity="0.75" />
+      <stop offset="55%" stop-color="#4B6E96" stop-opacity="0.4" />
+      <stop offset="85%" stop-color="#1E2836" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#0C0C0C" stop-opacity="0.0" />
+    </radialGradient>
+    <radialGradient id="softGlow2" cx="30%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#B8A9E8" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#5A4E82" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#0C0C0C" stop-opacity="0.0" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#0C0C0C" />
+  <rect width="100%" height="100%" fill="url(#softGlow1)" />
+  <rect width="100%" height="100%" fill="url(#softGlow2)" />
+</svg>
