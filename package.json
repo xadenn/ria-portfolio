@@ -11,7 +11,8 @@
     "db:seed": "node scripts/db-manage.mjs seed",
     "db:backup": "node scripts/db-manage.mjs backup",
     "db:inspect": "node scripts/inspect-database.mjs",
-    "audit": "node --env-file-if-exists=.env.local scripts/verify-launch.mjs"
+    "audit": "node --env-file-if-exists=.env.local scripts/verify-launch.mjs",
+    "push": "node scripts/git-sync.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
