@@ -245,10 +245,6 @@ function renderTextToCanvas(
   ctx.fillStyle = "#FFFFFF"
   ctx.textAlign = "center"
   ctx.textBaseline = "middle"
-  if ("letterSpacing" in ctx) {
-    // @ts-ignore
-    ctx.letterSpacing = "-0.025em"
-  }
 
   const centerY = height * 0.48
   ctx.fillText(title, width / 2, centerY)
@@ -257,14 +253,8 @@ function renderTextToCanvas(
     ctx.font = `600 ${Math.round(subPhysSize)}px ui-monospace, SFMono-Regular, Menlo, monospace`
     ctx.fillStyle = "rgba(215, 226, 234, 0.75)"
 
-    if ("letterSpacing" in ctx) {
-      // @ts-ignore
-      ctx.letterSpacing = "0.3em"
-      ctx.fillText(subtitle, width / 2, centerY + titlePhysSize * 0.65)
-    } else {
-      const spaced = subtitle.split("").join(" ")
-      ctx.fillText(spaced, width / 2, centerY + titlePhysSize * 0.65)
-    }
+    const spaced = subtitle.split("").join(" ")
+    ctx.fillText(spaced, width / 2, centerY + titlePhysSize * 0.65)
   }
 }
 
