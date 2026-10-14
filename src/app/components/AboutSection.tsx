@@ -88,80 +88,69 @@ export default function AboutSection() {
       >
         {/* ─────────────────────────────────────────────────────────────
             FOUR 3D DECORATIVE ARTIFACTS IN THE EXACT FOUR CORNERS
-            Mobile: Tucked tightly in corners (w-[58px], top/bottom/left/right-2.5)
-            Desktop: Unchanged original coordinates (top-[5.5rem], left/right-[2.5rem])
+            Persistent atmospheric background placement: z-0 in physical corners
+            Mobile: top/bottom-3 left/right-3, w-[68px]
+            Tablet/Desktop: top/bottom-6 lg:top/bottom-8, w-[120px] lg:w-[165px] xl:w-[200px]
             ───────────────────────────────────────────────────────────── */}
         {/* Top-left: Moon icon */}
-        <FadeIn
-          delay={0.1}
-          x={-60}
-          y={0}
-          duration={0.9}
-          className="absolute pointer-events-none z-10 top-2.5 left-2.5 sm:top-[5.5rem] sm:left-[2.5rem]"
+        <div
+          className="absolute pointer-events-none z-0 top-3 left-3 sm:top-6 sm:left-6 md:top-8 md:left-8"
+          aria-hidden="true"
         >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
             alt=""
             width={240}
             height={240}
-            className="w-[58px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:8s]"
+            className="w-[68px] sm:w-[95px] md:w-[130px] lg:w-[165px] xl:w-[200px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:8s]"
             draggable={false}
           />
-        </FadeIn>
+        </div>
 
         {/* Top-right: Lego icon */}
-        <FadeIn
-          delay={0.15}
-          x={60}
-          y={0}
-          duration={0.9}
-          className="absolute pointer-events-none z-10 top-2.5 right-2.5 sm:top-[5.5rem] sm:right-[2.5rem]"
+        <div
+          className="absolute pointer-events-none z-0 top-3 right-3 sm:top-6 sm:right-6 md:top-8 md:right-8"
+          aria-hidden="true"
         >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png"
             alt=""
             width={240}
             height={240}
-            className="w-[58px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:7s]"
+            className="w-[68px] sm:w-[95px] md:w-[130px] lg:w-[165px] xl:w-[200px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:7s]"
             draggable={false}
           />
-        </FadeIn>
+        </div>
 
         {/* Bottom-left: Smiley face */}
-        <FadeIn
-          delay={0.25}
-          x={-60}
-          y={0}
-          duration={0.9}
-          className="absolute pointer-events-none z-10 bottom-2.5 left-2.5 sm:bottom-[2.5rem] sm:left-[2.5rem]"
+        <div
+          className="absolute pointer-events-none z-0 bottom-3 left-3 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8"
+          aria-hidden="true"
         >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
             alt=""
             width={220}
             height={220}
-            className="w-[54px] sm:w-[150px] md:w-[185px] lg:w-[220px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:9s]"
+            className="w-[62px] sm:w-[88px] md:w-[120px] lg:w-[155px] xl:w-[185px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:9s]"
             draggable={false}
           />
-        </FadeIn>
+        </div>
 
         {/* Bottom-right: 3D cursor arrow */}
-        <FadeIn
-          delay={0.3}
-          x={60}
-          y={0}
-          duration={0.9}
-          className="absolute pointer-events-none z-10 bottom-2.5 right-2.5 sm:bottom-[2.5rem] sm:right-[2.5rem]"
+        <div
+          className="absolute pointer-events-none z-0 bottom-3 right-3 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8"
+          aria-hidden="true"
         >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
             alt=""
             width={240}
             height={240}
-            className="w-[58px] sm:w-[160px] md:w-[200px] lg:w-[240px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:8.5s]"
+            className="w-[68px] sm:w-[95px] md:w-[130px] lg:w-[165px] xl:w-[200px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] animate-pulse [animation-duration:8.5s]"
             draggable={false}
           />
-        </FadeIn>
+        </div>
 
         {/* ─────────────────────────────────────────────────────────────
             EXPANSIVE CENTER COLUMN: FILLS THE SCREEN WITH BREATHING ROOM
@@ -183,7 +172,7 @@ export default function AboutSection() {
           <div className="h-4 sm:h-12 md:h-14" />
 
           {/* Character-by-Character Pinned Scroll Animated Text (Expansive Width) */}
-          <div className="max-w-3xl lg:max-w-4xl px-2 sm:px-4">
+          <div className="max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl px-4 sm:px-6">
             <p className="text-[#D7E2EA] font-medium leading-relaxed md:leading-[1.7] text-base sm:text-xl md:text-2xl lg:text-[1.4rem] text-center">
               {characters.map((char, i) => (
                 <span
