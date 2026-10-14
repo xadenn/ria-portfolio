@@ -113,36 +113,19 @@ function DesignToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean
     <TiltCard maxAngle={6} className="h-full">
       <div
         className={cn(
-          "relative h-full min-h-[148px] p-6 sm:p-7 rounded-[26px] bg-white/[0.03] border border-white/10 transition-all duration-500 flex flex-col justify-between group overflow-hidden",
+          "relative h-full min-h-[148px] p-6 sm:p-7 rounded-2xl bg-white/[0.03] border border-white/10 transition-all duration-500 flex flex-col justify-between group overflow-hidden",
           isActive
-            ? "bg-white/[0.07] border-[#38BDF8]/50 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85),0_0_25px_-5px_rgba(56,189,248,0.28),0_0_30px_-5px_rgba(192,38,211,0.28)] scale-[1.02]"
-            : "hover:bg-white/[0.06] hover:border-[#D7E2EA]/30 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85),0_0_25px_-5px_rgba(56,189,248,0.18),0_0_30px_-5px_rgba(192,38,211,0.18)]"
+            ? "bg-white/[0.06] border-[#D7E2EA]/35 shadow-[0_10px_35px_rgba(0,0,0,0.6),0_0_25px_rgba(215,226,234,0.08)]"
+            : "hover:bg-white/[0.05] hover:border-[#D7E2EA]/30 hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]"
         )}
       >
-        {/* Soft optical glass caustics (Sapphire Blue on bottom-left, Amethyst Purple on top-right) */}
+        {/* Soft, balanced ambient specular sheen (subtle silver/platinum) */}
         <div
           className={cn(
-            "absolute -bottom-10 -left-10 w-44 h-44 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
-            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+            "absolute -top-12 -right-12 w-44 h-44 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
+            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-75"
           )}
-          style={{ background: "radial-gradient(circle, rgba(56, 189, 248, 0.28) 0%, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className={cn(
-            "absolute -top-10 -right-10 w-44 h-44 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
-            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-          )}
-          style={{ background: "radial-gradient(circle, rgba(192, 38, 211, 0.28) 0%, transparent 70%)" }}
-          aria-hidden="true"
-        />
-
-        {/* Top glass bevel specular highlight seam */}
-        <div
-          className={cn(
-            "pointer-events-none absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-colors duration-500",
-            isActive ? "via-white/60" : "group-hover:via-white/40"
-          )}
+          style={{ background: "radial-gradient(circle, rgba(215, 226, 234, 0.12) 0%, transparent 70%)" }}
           aria-hidden="true"
         />
 
@@ -153,18 +136,18 @@ function DesignToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean
             <div className="flex items-center gap-2.5">
               <span
                 className={cn(
-                  "transition-all duration-300 transform",
+                  "transition-all duration-500 transform",
                   isActive
-                    ? "text-[#38BDF8] scale-110 drop-shadow-[0_0_12px_rgba(56,189,248,0.8)]"
-                    : "text-[#D7E2EA]/70 group-hover:text-[#38BDF8] group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(56,189,248,0.7)]"
+                    ? "text-[#D7E2EA] drop-shadow-[0_0_12px_rgba(215,226,234,0.6)]"
+                    : "text-[#D7E2EA]/50 group-hover:text-[#D7E2EA]"
                 )}
               >
                 <Sparkle size={18} weight="fill" />
               </span>
               <h4
                 className={cn(
-                  "text-lg sm:text-xl font-bold tracking-wide transition-colors font-kanit",
-                  isActive ? "text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" : "text-white group-hover:text-[#D7E2EA]"
+                  "text-lg sm:text-xl font-bold tracking-wide transition-colors duration-500 font-kanit",
+                  isActive ? "text-white drop-shadow-[0_2px_12px_rgba(255,255,255,0.35)]" : "text-[#D7E2EA] group-hover:text-white"
                 )}
               >
                 {tool.name}
@@ -173,10 +156,10 @@ function DesignToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean
 
             <span
               className={cn(
-                "text-xs font-mono px-3 py-1 rounded-full border transition-all duration-300",
+                "text-xs font-mono px-3 py-1 rounded-full border transition-all duration-500",
                 isActive
-                  ? "bg-white/[0.12] border-[#38BDF8]/40 text-white shadow-[0_0_12px_rgba(56,189,248,0.25)]"
-                  : "bg-white/[0.06] group-hover:bg-white/[0.1] border-white/10 group-hover:border-[#D7E2EA]/25 text-[#D7E2EA]/80 group-hover:text-white"
+                  ? "bg-white/[0.12] border-[#D7E2EA]/40 text-white shadow-[0_0_15px_rgba(215,226,234,0.12)]"
+                  : "bg-white/[0.04] group-hover:bg-white/[0.08] border-white/10 group-hover:border-[#D7E2EA]/25 text-[#D7E2EA]/70 group-hover:text-white"
               )}
             >
               {tool.proficiency}
@@ -186,8 +169,8 @@ function DesignToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean
           {/* Bottom: Editorial Description */}
           <p
             className={cn(
-              "text-xs sm:text-sm font-light leading-relaxed transition-colors duration-300",
-              isActive ? "text-[#D7E2EA]" : "text-[#D7E2EA]/70 group-hover:text-[#D7E2EA]/90"
+              "text-xs sm:text-sm font-light leading-relaxed transition-colors duration-500",
+              isActive ? "text-white/95" : "text-[#D7E2EA]/75 group-hover:text-[#D7E2EA]/90"
             )}
           >
             {tool.desc}
@@ -206,19 +189,19 @@ function DevToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean })
     <TiltCard maxAngle={6} className="h-full">
       <div
         className={cn(
-          "relative h-full min-h-[145px] p-6 sm:p-7 rounded-[26px] bg-white/[0.03] border border-white/10 transition-all duration-500 flex flex-col justify-between group overflow-hidden",
+          "relative h-full min-h-[145px] p-6 sm:p-7 rounded-2xl bg-white/[0.03] border border-white/10 transition-all duration-500 flex flex-col justify-between group overflow-hidden",
           isActive
-            ? "bg-white/[0.07] border-[#D7E2EA]/40 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_20px_rgba(215,226,234,0.15)] scale-[1.02]"
-            : "hover:bg-white/[0.06] hover:border-[#D7E2EA]/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.65)]"
+            ? "bg-white/[0.06] border-[#D7E2EA]/35 shadow-[0_10px_35px_rgba(0,0,0,0.6),0_0_25px_rgba(215,226,234,0.08)]"
+            : "hover:bg-white/[0.05] hover:border-[#D7E2EA]/30 hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]"
         )}
       >
         {/* Subtle corner specular highlight */}
         <div
           className={cn(
-            "absolute -top-10 -right-10 w-36 h-36 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
-            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+            "absolute -top-12 -right-12 w-44 h-44 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
+            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-75"
           )}
-          style={{ background: "radial-gradient(circle, rgba(215, 226, 234, 0.2) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, rgba(215, 226, 234, 0.12) 0%, transparent 70%)" }}
           aria-hidden="true"
         />
 
@@ -226,18 +209,18 @@ function DevToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean })
           <div className="flex items-center justify-between gap-3 mb-3.5">
             <h4
               className={cn(
-                "text-lg sm:text-xl font-bold tracking-wide transition-colors font-kanit",
-                isActive ? "text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" : "text-white group-hover:text-[#D7E2EA]"
+                "text-lg sm:text-xl font-bold tracking-wide transition-colors duration-500 font-kanit",
+                isActive ? "text-white drop-shadow-[0_2px_12px_rgba(255,255,255,0.35)]" : "text-[#D7E2EA] group-hover:text-white"
               )}
             >
               {tool.name}
             </h4>
             <span
               className={cn(
-                "text-xs font-mono px-3 py-1 rounded-full border transition-all duration-300",
+                "text-xs font-mono px-3 py-1 rounded-full border transition-all duration-500",
                 isActive
-                  ? "bg-white/[0.12] border-white/30 text-white"
-                  : "bg-white/[0.06] group-hover:bg-white/[0.1] border-white/10 group-hover:border-[#D7E2EA]/25 text-[#D7E2EA]/80 group-hover:text-white"
+                  ? "bg-white/[0.12] border-[#D7E2EA]/40 text-white shadow-[0_0_15px_rgba(215,226,234,0.12)]"
+                  : "bg-white/[0.04] group-hover:bg-white/[0.08] border-white/10 group-hover:border-[#D7E2EA]/25 text-[#D7E2EA]/70 group-hover:text-white"
               )}
             >
               {tool.proficiency}
@@ -245,8 +228,8 @@ function DevToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean })
           </div>
           <p
             className={cn(
-              "text-xs sm:text-sm font-light leading-relaxed transition-colors duration-300",
-              isActive ? "text-[#D7E2EA]" : "text-[#D7E2EA]/70 group-hover:text-[#D7E2EA]/90"
+              "text-xs sm:text-sm font-light leading-relaxed transition-colors duration-500",
+              isActive ? "text-white/95" : "text-[#D7E2EA]/75 group-hover:text-[#D7E2EA]/90"
             )}
           >
             {tool.desc}

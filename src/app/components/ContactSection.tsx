@@ -319,15 +319,6 @@ export default function ContactSection() {
           {/* Right: Studio Location & Copyright */}
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1 text-center sm:text-right text-[#D7E2EA]/50 font-light">
             <span>&copy; {currentYear} {profile.name} · {profile.location}</span>
-            <span className="text-white/20">|</span>
-            <a
-              href="/admin"
-              className="text-[#D7E2EA]/40 hover:text-white transition-colors duration-200 font-mono text-[11px] uppercase tracking-wider flex items-center gap-1"
-              title="Open Admin CMS Dashboard"
-            >
-              <span>Admin</span>
-              <span>↗</span>
-            </a>
           </div>
         </div>
       </footer>
