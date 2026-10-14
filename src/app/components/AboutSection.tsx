@@ -16,6 +16,14 @@ export default function AboutSection() {
   const pinTrackRef = useRef<HTMLDivElement>(null);
   const pinnedViewportRef = useRef<HTMLDivElement>(null);
   const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Pin section until the character-by-character text animation is fully completed
   useEffect(() => {
@@ -30,14 +38,15 @@ export default function AboutSection() {
       pin: pinnedViewport,
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.5,
-      anticipatePin: 1,
+      scrub: isMobile ? 0.3 : 0.5,
+      anticipatePin: isMobile ? 0 : 1,
+      fastScrollEnd: true,
+      preventOverlaps: true,
       onUpdate: (self) => {
         const p = self.progress;
-        // Text animation completes by p = 0.65
-        // From 0.65 to 1.0: page stays pinned with 100% revealed text and buttons prominently visible
+        // Text animation completes smoothly
         const leadIn = 0.04;
-        const revealEnd = 0.65;
+        const revealEnd = isMobile ? 0.55 : 0.65;
         const animT = Math.max(0, Math.min(1, (p - leadIn) / (revealEnd - leadIn)));
 
         for (let i = 0; i < total; i++) {
@@ -60,7 +69,7 @@ export default function AboutSection() {
     return () => {
       st.kill();
     };
-  }, [aboutText]);
+  }, [aboutText, isMobile]);
 
   const characters = aboutText.split("");
 
@@ -69,13 +78,13 @@ export default function AboutSection() {
       id="about"
       ref={pinTrackRef}
       className="relative w-full bg-[#0C0C0C]"
-      style={{ height: "280vh" }}
+      style={{ height: isMobile ? "140vh" : "280vh" }}
       aria-label="About Ria Verma"
     >
       {/* Pinned Fullscreen Stage: Stays in place until text animation completes */}
       <div
         ref={pinnedViewportRef}
-        className="w-full h-screen overflow-hidden relative flex flex-col items-center justify-center px-6 sm:px-12 md:px-16 bg-[#0C0C0C] font-kanit text-[#D7E2EA] select-none"
+        className="w-full h-screen h-[100dvh] overflow-hidden relative flex flex-col items-center justify-center px-6 sm:px-12 md:px-16 bg-[#0C0C0C] font-kanit text-[#D7E2EA] select-none"
       >
         {/* ─────────────────────────────────────────────────────────────
             FOUR 3D DECORATIVE ARTIFACTS IN THE EXACT FOUR CORNERS

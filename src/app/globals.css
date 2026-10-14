@@ -633,7 +633,7 @@ html.lenis body {
 
 /* ── transitions-dev: Card hover tilt (19-card-tilt.md) ── */
 .t-tilt {
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 .t-tilt-card {

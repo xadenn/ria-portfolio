@@ -146,9 +146,17 @@ export default function WorkSection() {
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalClosing, setIsModalClosing] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const { showToast } = useToast();
   const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Pinning and Scroll-Driven 3D Wheel Sequence
   useEffect(() => {
@@ -159,20 +167,18 @@ export default function WorkSection() {
     const totalTurns = wheelItems.length;
 
     // Pin full-screen until all works are scrolled through
-    // scrub: 0.12 ensures immediate, silky tracking with Lenis inertia
     const st = ScrollTrigger.create({
       trigger: pinTrack,
       pin: pinnedViewport,
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.12,
-      anticipatePin: 1,
+      scrub: isMobile ? 0.35 : 0.12,
+      anticipatePin: isMobile ? 0 : 1,
       fastScrollEnd: true,
       preventOverlaps: true,
       onUpdate: (self) => {
         const p = self.progress;
         // Continuous, silky smooth Hermite curve
-        // Gentle lead-in at 0..0.03, continuous buttery rotation through drum, gentle rest at 0.97..1.0
         if (p <= 0.03) {
           wheelRef.current?.to(0);
         } else if (p >= 0.97) {
@@ -191,7 +197,7 @@ export default function WorkSection() {
       st.kill();
       scrollTriggerRef.current = null;
     };
-  }, [wheelItems.length]);
+  }, [wheelItems.length, isMobile]);
 
   const handleOpenModal = (p: Project) => {
     setSelectedProject(p);
@@ -256,12 +262,12 @@ export default function WorkSection() {
       <div
         ref={pinTrackRef}
         className="relative w-full"
-        style={{ height: `${(wheelItems.length + 1) * 85}vh` }}
+        style={{ height: `${(wheelItems.length + 1) * (isMobile ? 48 : 85)}vh` }}
       >
         {/* Pinned Fullscreen Stage */}
         <div
           ref={pinnedViewportRef}
-          className="w-full h-screen overflow-hidden relative flex flex-col justify-between bg-[#0C0C0C]"
+          className="w-full h-screen h-[100dvh] overflow-hidden relative flex flex-col justify-between bg-[#0C0C0C]"
         >
           {/* Seamless edge blend gradients into #0C0C0C */}
           <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0C0C0C] via-[#0C0C0C]/70 to-transparent z-10" />

@@ -336,19 +336,27 @@ export const WorksWheel = React.forwardRef<WorksWheelRef, WorksWheelProps>(
           role="listbox"
           aria-label={label}
           aria-activedescendant={`works-wheel-${active}`}
-          className="focus-visible:outline-foreground absolute inset-0 cursor-grab touch-pan-x outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 active:cursor-grabbing"
+          className={cn(
+            "focus-visible:outline-foreground absolute inset-0 outline-none focus-visible:outline-2 focus-visible:-outline-offset-4",
+            disableInternalWheel
+              ? "touch-pan-y cursor-default"
+              : "cursor-grab touch-pan-y active:cursor-grabbing"
+          )}
           style={{ perspective: `${metrics.depth}px` }}
           onPointerDown={(event) => {
+            if (disableInternalWheel || event.pointerType !== "mouse") return;
             drag.current = event.clientY;
-            event.currentTarget.setPointerCapture(event.pointerId);
+            try {
+              event.currentTarget.setPointerCapture(event.pointerId);
+            } catch (_) {}
           }}
           onPointerMove={(event) => {
-            if (drag.current === null) return;
+            if (disableInternalWheel || drag.current === null) return;
             to(target.current + (drag.current - event.clientY) / DRAG_UNITS);
             drag.current = event.clientY;
           }}
           onPointerUp={() => {
-            // Land on an item rather than between two.
+            if (disableInternalWheel) return;
             drag.current = null;
             if (target.current > 1) to(Math.round(target.current));
           }}

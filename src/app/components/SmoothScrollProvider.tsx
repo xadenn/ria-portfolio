@@ -16,15 +16,22 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Prevent mobile address bar resize from freezing GSAP ScrollTrigger
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+    });
+
     // Instantiate ultra-premium Lenis smooth scroll engine
     const instance = new Lenis({
-      duration: 1.3, // Silky, weighted momentum that glides into place
+      duration: 1.2, // Silky, weighted momentum that glides into place
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Velvet exponential deceleration curve
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 0.95, // Calibrated momentum preventing aggressive wheel jumps
-      touchMultiplier: 1.2, // Tactile, natural 1:1 response on trackpads & mobile
+      touchMultiplier: 1.0, // Natural 1:1 tactile touch response on phones
+      syncTouch: false, // Prevents mobile touch gestures from fighting native momentum
       infinite: false,
       autoRaf: false, // Driven by GSAP ticker for 120Hz/60Hz frame-perfect synchronization
     });
@@ -32,12 +39,13 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     lenisRef.current = instance;
     setLenis(instance);
 
-    // Perfectly synchronize Lenis render loop with GSAP ticker (0 lag, zero frame tearing)
+    // Perfectly synchronize Lenis render loop with GSAP ticker (smooth 120Hz/60Hz)
     const tickerCallback = (time: number) => {
       instance.raf(time * 1000);
     };
     gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
+    // lagSmoothing(500, 33) absorbs temporary mobile frame-rate dips without freezing scroll
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Synchronize Lenis scroll position with GSAP ScrollTrigger
     instance.on("scroll", (e: { velocity: number; direction: number; scroll: number }) => {

@@ -33,7 +33,7 @@ export default function TiltCard({
     };
 
     const track = (e: PointerEvent) => {
-      if (reduce) return;
+      if (reduce || e.pointerType !== "mouse") return;
       const r = tilt.getBoundingClientRect();
       const px = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
       const py = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
@@ -45,29 +45,15 @@ export default function TiltCard({
       card.style.setProperty("--tilt-gy", (py * 100).toFixed(1) + "%");
     };
 
-    const onPointerDown = (e: PointerEvent) => {
-      if (e.pointerType !== "mouse") {
-        try {
-          tilt.setPointerCapture(e.pointerId);
-        } catch (_) {}
-      }
-    };
-
     const onPointerLeave = (e: PointerEvent) => {
       if (e.pointerType === "mouse") reset();
     };
 
-    tilt.addEventListener("pointerdown", onPointerDown);
     tilt.addEventListener("pointermove", track);
-    tilt.addEventListener("pointerup", reset);
-    tilt.addEventListener("pointercancel", reset);
     tilt.addEventListener("pointerleave", onPointerLeave);
 
     return () => {
-      tilt.removeEventListener("pointerdown", onPointerDown);
       tilt.removeEventListener("pointermove", track);
-      tilt.removeEventListener("pointerup", reset);
-      tilt.removeEventListener("pointercancel", reset);
       tilt.removeEventListener("pointerleave", onPointerLeave);
     };
   }, [reduce, maxAngle]);
