@@ -2,8 +2,6 @@
 
 import React from "react";
 import { TiltedGridHero, type TiltedGridImage } from "@/components/ui/tilted-grid-hero";
-import { ArrowUpRight, Eye } from "@phosphor-icons/react";
-import { useToast } from "./Toast";
 import { TextEffect } from "@/components/ui/text-effect";
 
 const CDN = "https://pub-940ccf6255b54fa799a9b01050e6c227.r2.dev";
@@ -55,7 +53,6 @@ import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function CurvedReelSection() {
   const { portfolio } = usePortfolio();
-  const { showToast } = useToast();
 
   const images: TiltedGridImage[] = portfolio.designs.map((d) => ({
     src: d.src,
@@ -125,28 +122,11 @@ export default function CurvedReelSection() {
           </TiltedGridHero>
         </div>
 
-        {/* Editorial Statement & Actions: Cleanly positioned BELOW the reel */}
-        <div className="mt-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8 pt-8 border-t border-[#D7E2EA]/10 font-kanit">
-          <div className="max-w-2xl">
-            <h3 className="hero-heading font-black uppercase text-2xl sm:text-3xl lg:text-4xl tracking-tight">
-              Where spatial form meets kinetic precision.
-            </h3>
-            <p className="mt-3 text-sm sm:text-base text-[#D7E2EA]/75 font-light leading-relaxed">
-              Images stream along a 16-facet cylindrical arc, flattening as they greet the focal lens and bending smoothly past the perimeter.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => showToast("Curated Designs Archive Expanded", "sparkle")}
-              className="px-6 py-3 rounded-full border border-[#D7E2EA]/20 bg-white/[0.04] hover:bg-[#D7E2EA] hover:text-[#0C0C0C] text-[#D7E2EA] text-xs font-mono tracking-widest uppercase transition-all duration-300 flex items-center gap-2.5 cursor-pointer group shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
-            >
-              <Eye size={16} weight="bold" className="text-[#D7E2EA]/75 group-hover:text-[#0C0C0C] transition-colors" />
-              <span>Inspect Designs</span>
-              <ArrowUpRight size={16} weight="bold" className="opacity-75 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-            </button>
-          </div>
+        {/* Editorial Statement: Cleanly positioned BELOW the reel */}
+        <div className="mt-12 pt-8 border-t border-[#D7E2EA]/10 font-kanit">
+          <h3 className="hero-heading font-black uppercase text-2xl sm:text-3xl lg:text-4xl tracking-tight max-w-2xl">
+            Where spatial form meets kinetic precision.
+          </h3>
         </div>
       </div>
     </section>
