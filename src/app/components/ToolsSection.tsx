@@ -327,7 +327,7 @@ export default function ToolsSection() {
                 Design &amp; Spatial Systems
               </h3>
               <span className="text-xs font-mono text-sky-300/60 ml-auto">
-                {visibleDesignTools.length} of {designTools.length} Tools
+                {designTools.length} Tools
               </span>
             </div>
 
@@ -354,7 +354,7 @@ export default function ToolsSection() {
                     onClick={() => setDesignLimit((prev) => prev + 5)}
                     className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs font-mono tracking-widest uppercase text-[#D7E2EA] bg-white/[0.04] hover:bg-white/[0.08] hover:text-white border border-white/10 hover:border-[#38BDF8]/40 transition-all cursor-pointer group shadow-[0_4px_16px_rgba(0,0,0,0.3)] active:scale-95"
                   >
-                    <span>Load More Tools (+{Math.min(5, designTools.length - designLimit)})</span>
+                    <span>Load More</span>
                     <CaretDown size={14} weight="bold" className="text-[#38BDF8] group-hover:translate-y-0.5 transition-transform" />
                   </button>
                 ) : (
@@ -381,7 +381,7 @@ export default function ToolsSection() {
                 Engineering &amp; Agile Collaboration
               </h3>
               <span className="text-xs font-mono text-[#D7E2EA]/50 ml-auto">
-                {visibleDevTools.length} of {devTools.length} Tools
+                {devTools.length} Tools
               </span>
             </div>
 
@@ -408,7 +408,7 @@ export default function ToolsSection() {
                     onClick={() => setDevLimit((prev) => prev + 5)}
                     className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs font-mono tracking-widest uppercase text-[#D7E2EA] bg-white/[0.04] hover:bg-white/[0.08] hover:text-white border border-white/10 hover:border-[#D7E2EA]/30 transition-all cursor-pointer group shadow-[0_4px_16px_rgba(0,0,0,0.3)] active:scale-95"
                   >
-                    <span>Load More Tools (+{Math.min(5, devTools.length - devLimit)})</span>
+                    <span>Load More</span>
                     <CaretDown size={14} weight="bold" className="text-[#D7E2EA] group-hover:translate-y-0.5 transition-transform" />
                   </button>
                 ) : (
