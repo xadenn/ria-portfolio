@@ -119,13 +119,21 @@ function DesignToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean
             : "hover:bg-white/[0.05] hover:border-[#D7E2EA]/30 hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]"
         )}
       >
-        {/* Soft, balanced ambient specular sheen (subtle silver/platinum) */}
+        {/* Dreamy Pastel Tone Effects (Sapphire Blue on bottom-left, Amethyst Purple on top-right) */}
         <div
           className={cn(
-            "absolute -top-12 -right-12 w-44 h-44 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
-            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-75"
+            "absolute -bottom-10 -left-10 w-48 h-48 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
+            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
           )}
-          style={{ background: "radial-gradient(circle, rgba(215, 226, 234, 0.12) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, rgba(56, 189, 248, 0.28) 0%, transparent 70%)" }}
+          aria-hidden="true"
+        />
+        <div
+          className={cn(
+            "absolute -top-10 -right-10 w-48 h-48 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
+            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+          )}
+          style={{ background: "radial-gradient(circle, rgba(192, 38, 211, 0.28) 0%, transparent 70%)" }}
           aria-hidden="true"
         />
 
@@ -138,8 +146,8 @@ function DesignToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean
                 className={cn(
                   "transition-all duration-500 transform",
                   isActive
-                    ? "text-[#D7E2EA] drop-shadow-[0_0_12px_rgba(215,226,234,0.6)]"
-                    : "text-[#D7E2EA]/50 group-hover:text-[#D7E2EA]"
+                    ? "text-[#38BDF8] scale-110 drop-shadow-[0_0_12px_rgba(56,189,248,0.7)]"
+                    : "text-[#D7E2EA]/60 group-hover:text-[#38BDF8] group-hover:scale-110"
                 )}
               >
                 <Sparkle size={18} weight="fill" />
@@ -158,7 +166,7 @@ function DesignToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean
               className={cn(
                 "text-xs font-mono px-3 py-1 rounded-full border transition-all duration-500",
                 isActive
-                  ? "bg-white/[0.12] border-[#D7E2EA]/40 text-white shadow-[0_0_15px_rgba(215,226,234,0.12)]"
+                  ? "bg-white/[0.12] border-white/25 text-white shadow-[0_0_12px_rgba(56,189,248,0.2)]"
                   : "bg-white/[0.04] group-hover:bg-white/[0.08] border-white/10 group-hover:border-[#D7E2EA]/25 text-[#D7E2EA]/70 group-hover:text-white"
               )}
             >
@@ -195,13 +203,21 @@ function DevToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean })
             : "hover:bg-white/[0.05] hover:border-[#D7E2EA]/30 hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]"
         )}
       >
-        {/* Subtle corner specular highlight */}
+        {/* Dreamy Pastel Tone Effects for Dev Tools (Sapphire & Amethyst caustics) */}
         <div
           className={cn(
-            "absolute -top-12 -right-12 w-44 h-44 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
-            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-75"
+            "absolute -bottom-10 -left-10 w-44 h-44 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
+            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
           )}
-          style={{ background: "radial-gradient(circle, rgba(215, 226, 234, 0.12) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, transparent 70%)" }}
+          aria-hidden="true"
+        />
+        <div
+          className={cn(
+            "absolute -top-10 -right-10 w-44 h-44 rounded-full transition-opacity duration-700 pointer-events-none blur-2xl",
+            isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+          )}
+          style={{ background: "radial-gradient(circle, rgba(192, 38, 211, 0.22) 0%, transparent 70%)" }}
           aria-hidden="true"
         />
 
@@ -219,7 +235,7 @@ function DevToolCard({ tool, isActive }: { tool: ToolItem; isActive?: boolean })
               className={cn(
                 "text-xs font-mono px-3 py-1 rounded-full border transition-all duration-500",
                 isActive
-                  ? "bg-white/[0.12] border-[#D7E2EA]/40 text-white shadow-[0_0_15px_rgba(215,226,234,0.12)]"
+                  ? "bg-white/[0.12] border-white/25 text-white shadow-[0_0_12px_rgba(56,189,248,0.2)]"
                   : "bg-white/[0.04] group-hover:bg-white/[0.08] border-white/10 group-hover:border-[#D7E2EA]/25 text-[#D7E2EA]/70 group-hover:text-white"
               )}
             >
