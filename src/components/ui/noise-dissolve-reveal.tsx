@@ -135,16 +135,13 @@ void main() {
   float aspect = u_resolution.x / max(u_resolution.y, 1.0);
   vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
 
-  // 1. ACTIVE NOISE DISTORTION WAVE
-  // As dissolve begins, turbulent noise actively warps and distorts the typography
-  float distStrength = smoothstep(0.0, 0.25, u_progress) * (1.0 - smoothstep(0.85, 1.0, u_progress));
-  float nx = fbm(p * 5.5 + vec2(u_time * 0.45, 0.0));
-  float ny = fbm(p * 5.5 + vec2(0.0, u_time * 0.45) + 31.7);
-  vec2 distortion = vec2(nx - 0.5, ny - 0.5) * 0.09 * distStrength;
-
-  vec2 distUV = clamp(uv + distortion, 0.0, 1.0);
+  // 1. STATIC TYPOGRAPHY MAPPING (ZERO ZOOMING OR DISTORTION)
+  // The typography sits rock-solid and stable throughout the hold and dissolve
+  vec2 distUV = uv;
 
   // 2. FRACTAL NOISE TEAR EROSION
+  float nx = fbm(p * 5.5 + vec2(u_time * 0.45, 0.0));
+  float ny = fbm(p * 5.5 + vec2(0.0, u_time * 0.45) + 31.7);
   float n = fbm(p * u_scale + vec2(nx * 0.15, ny * 0.15));
   n = smoothstep(0.24, 0.76, n);
 
@@ -165,21 +162,16 @@ void main() {
   edge = clamp(edge * 1.85, 0.0, 1.0);
   edge *= smoothstep(0.01, 0.06, u_progress) * (1.0 - smoothstep(0.95, 1.0, u_progress));
 
-  // 4. TEXT SAMPLING WITH CHROMATIC RGB DISPERSION ALONG DISTORTION
+  // 4. CLEAN TEXT SAMPLING (NO CHROMATIC ABERRATION OR ZOOM)
   vec3 textSample = u_color;
   float textA = 0.0;
   if (u_hasText == 1) {
-    vec2 splitR = clamp(distUV + distortion * 0.35, 0.0, 1.0);
-    vec2 splitB = clamp(distUV - distortion * 0.35, 0.0, 1.0);
-    float r = texture(u_textTexture, splitR).r;
-    float g = texture(u_textTexture, distUV).g;
-    float b = texture(u_textTexture, splitB).b;
-    float a = texture(u_textTexture, distUV).a;
-    textSample = vec3(r, g, b);
-    textA = a;
+    vec4 tex = texture(u_textTexture, distUV);
+    textSample = tex.rgb;
+    textA = tex.a;
   }
 
-  // Base veil color: blend curtain with distorted text
+  // Base veil color: blend curtain with text
   vec3 baseColor = mix(u_color, textSample, textA);
 
   // Blend luminous tear edge fringe (#D7E2EA / #FFFFFF)
@@ -209,14 +201,14 @@ const NDR_CSS = `
 `
 
 function getTitleMetrics(clientWidth: number) {
-  // Mobile (<640): ~48px (matches text-5xl)
-  // Tablet (640-1024): ~72px (matches text-7xl)
-  // Desktop (>=1024): 96px (matches text-8xl)
+  // Mobile (<640): 48px (matches text-5xl exactly)
+  // Tablet (640-1024): 72px (matches text-7xl exactly)
+  // Desktop (>=1024): 96px (matches text-8xl exactly)
   let titleCssSize = 96
   if (clientWidth < 640) {
-    titleCssSize = Math.max(Math.min(clientWidth * 0.12, 54), 44)
+    titleCssSize = 48
   } else if (clientWidth < 1024) {
-    titleCssSize = Math.max(Math.min(clientWidth * 0.085, 76), 64)
+    titleCssSize = 72
   } else {
     titleCssSize = 96
   }
@@ -249,10 +241,14 @@ function renderTextToCanvas(
   const titlePhysSize = titleCssSize * dpr
   const subPhysSize = subCssSize * dpr
 
-  ctx.font = `900 ${Math.round(titlePhysSize)}px Kanit, "Helvetica Neue", Arial, sans-serif`
+  ctx.font = `900 ${Math.round(titlePhysSize)}px var(--font-kanit), Kanit, "Helvetica Neue", Arial, sans-serif`
   ctx.fillStyle = "#FFFFFF"
   ctx.textAlign = "center"
   ctx.textBaseline = "middle"
+  if ("letterSpacing" in ctx) {
+    // @ts-ignore
+    ctx.letterSpacing = "-0.025em"
+  }
 
   const centerY = height * 0.48
   ctx.fillText(title, width / 2, centerY)
@@ -261,8 +257,14 @@ function renderTextToCanvas(
     ctx.font = `600 ${Math.round(subPhysSize)}px ui-monospace, SFMono-Regular, Menlo, monospace`
     ctx.fillStyle = "rgba(215, 226, 234, 0.75)"
 
-    const spaced = subtitle.split("").join(" ")
-    ctx.fillText(spaced, width / 2, centerY + titlePhysSize * 0.65)
+    if ("letterSpacing" in ctx) {
+      // @ts-ignore
+      ctx.letterSpacing = "0.3em"
+      ctx.fillText(subtitle, width / 2, centerY + titlePhysSize * 0.65)
+    } else {
+      const spaced = subtitle.split("").join(" ")
+      ctx.fillText(spaced, width / 2, centerY + titlePhysSize * 0.65)
+    }
   }
 }
 

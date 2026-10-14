@@ -68,11 +68,11 @@ html.lenis body {
 @keyframes heroRiseIn {
   from {
     opacity: 0;
-    transform: translateY(4vh) scale(1.03);
+    transform: translateY(2vh);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
